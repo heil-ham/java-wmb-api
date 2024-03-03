@@ -78,4 +78,10 @@ public class CustomerController {
                 .build();
         return ResponseEntity.ok(response);
     }
+
+    @PutMapping
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) {
+        Customer newCustomer = customerService.update(customer);
+        return ResponseEntity.ok(newCustomer);
+    }
 }

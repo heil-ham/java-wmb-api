@@ -45,4 +45,10 @@ public class CustomerServiceImpl implements CustomerService {
         Specification<Customer> specification = CustomerSpecification.getSpecification(request);
         return customerRepository.findAll(specification,pageable);
     }
+
+    @Override
+    public Customer update(Customer customer) {
+        getById(customer.getId());
+        return customerRepository.save(customer);
+    }
 }

@@ -9,4 +9,5 @@ public interface CustomerService {
     Customer getById(String id);
     Page<Customer> getAll(SearchCustomerRequest request);
     Customer update(Customer customer);
+    void deleteById(String id);
 }

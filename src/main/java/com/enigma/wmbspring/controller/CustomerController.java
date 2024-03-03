@@ -7,10 +7,7 @@ import com.enigma.wmbspring.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,5 +28,12 @@ public class CustomerController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Customer> getCustomerId(@PathVariable String id) {
+        Customer customer = customerService.getById(id);
+
+        return ResponseEntity.ok(customer);
     }
 }

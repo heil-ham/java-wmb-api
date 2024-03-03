@@ -5,4 +5,5 @@ import org.springframework.data.domain.Page;
 
 public interface CustomerService {
     Customer create(Customer customer);
+    Customer getById(String id);
 }

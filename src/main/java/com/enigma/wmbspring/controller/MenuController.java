@@ -91,4 +91,10 @@ public class MenuController {
         return ResponseEntity.ok(newMenu);
     }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable String id) {
+        menuService.delete(id);
+        return ResponseEntity.ok("ok");
+    }
+
 }

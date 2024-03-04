@@ -10,5 +10,6 @@ public interface MenuService {
     Menu getById(String id);
     Page<Menu> getAll(SearchMenuRequest request);
     Menu update(Menu menu);
+    void delete(String id);
 
 }

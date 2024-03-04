@@ -58,4 +58,10 @@ public class MenuServiceImpl implements MenuService {
         getById(menu.getId());
         return menuRepository.save(menu);
     }
+
+    @Override
+    public void delete(String id) {
+        Menu menu = getById(id);
+        menuRepository.delete(menu);
+    }
 }

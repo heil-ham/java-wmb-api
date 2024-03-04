@@ -52,4 +52,10 @@ public class MenuServiceImpl implements MenuService {
         Specification<Menu> specification = MenuSpecification.getSpecification(request);
         return menuRepository.findAll(specification, pageable);
     }
+
+    @Override
+    public Menu update(Menu menu) {
+        getById(menu.getId());
+        return menuRepository.save(menu);
+    }
 }

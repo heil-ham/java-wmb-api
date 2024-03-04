@@ -85,4 +85,10 @@ public class MenuController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping
+    public ResponseEntity<Menu> update(@RequestBody Menu menu) {
+        Menu newMenu = menuService.update(menu);
+        return ResponseEntity.ok(newMenu);
+    }
+
 }

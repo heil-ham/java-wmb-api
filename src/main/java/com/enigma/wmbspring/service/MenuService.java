@@ -9,5 +9,6 @@ public interface MenuService {
     Menu create(NewMenuRequest request);
     Menu getById(String id);
     Page<Menu> getAll(SearchMenuRequest request);
+    Menu update(Menu menu);
 
 }

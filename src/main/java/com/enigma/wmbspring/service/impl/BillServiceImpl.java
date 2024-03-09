@@ -1,5 +1,6 @@
 package com.enigma.wmbspring.service.impl;
 
+import com.enigma.wmbspring.constant.TransType;
 import com.enigma.wmbspring.dto.request.BillRequest;
 import com.enigma.wmbspring.entity.*;
 import com.enigma.wmbspring.repository.BillRepository;
@@ -25,8 +26,14 @@ public class BillServiceImpl implements BillService {
     @Override
     public Bill create(BillRequest request) {
         Customer customer = customerService.getById(request.getCustomerId());
-        Tables tableName = tablesService.getByName(request.getTableName());
         TransactionType transactionType = transactionTypeService.getByName(request.getTransType());
+        Tables tableName;
+        if (request.getTransType().equals("TA")) {
+             tableName = null;
+        } else {
+             tableName = tablesService.getByName(request.getTableName());
+        }
+
 
 
         Bill bill = Bill.builder()

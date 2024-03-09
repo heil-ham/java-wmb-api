@@ -12,7 +12,7 @@ import lombok.*;
 @Entity
 @Table(name = "m_trans_type")
 public class TransactionType {
-    @Column(name = "id")
+    @Id
     @Enumerated(EnumType.STRING)
     private TransType transType;
 

@@ -4,5 +4,5 @@ import com.enigma.wmbspring.constant.TransType;
 import com.enigma.wmbspring.entity.TransactionType;
 
 public interface TransactionTypeService {
-    TransactionType getOrSave(TransType type);
+    TransactionType getByName(String type);
 }

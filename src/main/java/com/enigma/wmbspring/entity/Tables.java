@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table
+@Table(name = "m_table")
 public class Tables {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 public class TransactionTypeServiceImpl implements TransactionTypeService {
     private final TransactionTypeRepository transactionTypeRepository;
     @Override
-    public TransactionType getOrSave(TransType type) {
-        return transactionTypeRepository.findByTransType(type)
-                .orElseGet(() -> transactionTypeRepository.saveAndFlush(TransactionType.builder().transType(type).build()));
+    public TransactionType getByName(String type) {
+        return transactionTypeRepository.findByTransType(TransType.valueOf(type));
     }
 }

@@ -66,4 +66,24 @@ public class CustomerServiceImplTest {
 
         Assertions.assertNotNull(customerService.getOneByid(id));
     }
+
+    @Test
+    void shouldReturnCustomerWhenGetById() {
+        // given
+        String id = "cus-1";
+
+        // Stubbing
+        Customer parameterCustomer = Customer.builder()
+                .id(id)
+                .name("Paul")
+                .phone_number("084567454")
+                .status(true)
+                .userAccount(UserAccount.builder().build())
+                .build();
+
+        Mockito.when(customerRepository.findById(id))
+                .thenReturn(Optional.of(parameterCustomer));
+
+        Assertions.assertNotNull(customerService.getById(id));
+    }
 }

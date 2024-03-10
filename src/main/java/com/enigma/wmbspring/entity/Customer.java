@@ -20,4 +20,11 @@ public class Customer {
 
     @Column(name = "phone_number")
     private String phone_number;
+
+    @Column(name = "status")
+    private Boolean status;
+
+    @OneToOne
+    @JoinColumn(name = "user_account_id", unique = true)
+    private UserAccount userAccount;
 }

@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
+import java.util.Optional;
+
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class CustomerServiceImplTest {
@@ -43,5 +45,25 @@ public class CustomerServiceImplTest {
                 .thenReturn(parameterCustomer);
 
         Assertions.assertNotNull(customerService.create(parameterCustomer));
+    }
+
+    @Test
+    void shouldReturnCustomerWhenGetOneById() {
+        // given
+        String id = "cus-1";
+
+        // Stubbing
+        Customer parameterCustomer = Customer.builder()
+                .id(id)
+                .name("Paul")
+                .phone_number("084567454")
+                .status(true)
+                .userAccount(UserAccount.builder().build())
+                .build();
+
+        Mockito.when(customerRepository.findById(id))
+                .thenReturn(Optional.of(parameterCustomer));
+
+        Assertions.assertNotNull(customerService.getOneByid(id));
     }
 }

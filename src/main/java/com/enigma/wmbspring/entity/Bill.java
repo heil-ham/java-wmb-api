@@ -39,6 +39,10 @@ public class Bill {
     @JoinColumn(name = "trans_type")
     private TransactionType transactionType;
 
+    @OneToOne
+    @JoinColumn(name = "payment_id", unique = true)
+    private Payment payment;
+
 
 
 

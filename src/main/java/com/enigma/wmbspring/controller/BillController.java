@@ -4,12 +4,14 @@ import com.enigma.wmbspring.constant.APIUrl;
 import com.enigma.wmbspring.constant.ResponseMessage;
 import com.enigma.wmbspring.dto.request.BillRequest;
 import com.enigma.wmbspring.dto.request.SearchBillRequest;
+import com.enigma.wmbspring.dto.request.UpdateTransactionStatusRequest;
 import com.enigma.wmbspring.dto.response.BillResponse;
 import com.enigma.wmbspring.dto.response.CommonResponse;
 import com.enigma.wmbspring.dto.response.PagingResponse;
 import com.enigma.wmbspring.entity.Bill;
 import com.enigma.wmbspring.service.BillService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.Update;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.print.attribute.standard.Media;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,6 +67,19 @@ public class BillController {
                 .paging(paging)
                 .build();
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/status")
+    public ResponseEntity<CommonResponse<?>> updateStatus(@RequestBody Map<String, Object> request) {
+        UpdateTransactionStatusRequest updateTransactionStatusRequest = UpdateTransactionStatusRequest.builder()
+                .orderId(request.get("order_id").toString())
+                .transactionStatus(request.get("transaction_status").toString())
+                .build();
+        billService.updateStatus(updateTransactionStatusRequest);
+        return ResponseEntity.ok(CommonResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .message(ResponseMessage.SUCCESS_UPDATE_DATA)
+                .build());
     }
 
 }

@@ -15,4 +15,5 @@ public class BillResponse {
     private String customerId;
     private Date transDate;
     private List<BillDetailResponse> billDetails;
+    private PaymentResponse paymentResponse;
 }

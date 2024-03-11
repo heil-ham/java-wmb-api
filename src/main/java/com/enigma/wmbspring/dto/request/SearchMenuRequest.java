@@ -15,7 +15,6 @@ public class SearchMenuRequest {
     private String direction;
     private String name;
     private Long price;
-    private Image image;
     private Long minPrice;
     private Long maxPrice;
 

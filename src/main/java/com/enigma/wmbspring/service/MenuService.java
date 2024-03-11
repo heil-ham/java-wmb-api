@@ -11,7 +11,7 @@ public interface MenuService {
     MenuResponse create(NewMenuRequest request);
     MenuResponse getOneById(String id);
     Menu getById(String id);
-    Page<MenuResponse> getAll(SearchMenuRequest request);
+    Page<Menu> getAll(SearchMenuRequest request);
     MenuResponse update(UpdateMenuRequest request);
     Menu update(Menu menu);
     void delete(String id);

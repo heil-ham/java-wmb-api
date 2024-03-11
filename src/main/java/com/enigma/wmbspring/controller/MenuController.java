@@ -12,6 +12,7 @@ import com.enigma.wmbspring.entity.Menu;
 import com.enigma.wmbspring.service.MenuService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
@@ -65,14 +66,14 @@ public class MenuController {
     }
 
     @GetMapping
-    public ResponseEntity<CommonResponse<List<MenuResponse>>> getAllMenu(
+    @SecurityRequirement(name = "Bearer Authentication")
+    public ResponseEntity<CommonResponse<List<Menu>>> getAllMenu(
             @RequestParam(name = "page", defaultValue = "1") Integer page,
             @RequestParam(name = "size", defaultValue = "10") Integer size,
             @RequestParam(name = "sortBy", defaultValue = "name") String sortBy,
             @RequestParam(name = "direction", defaultValue = "asc") String direction,
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "price", required = false) Long price,
-            @RequestParam(name = "image", required = false) Image image,
             @RequestParam(name = "minPrice", required = false) Long minPrice,
             @RequestParam(name = "maxPrice", required = false) Long maxPrice
 
@@ -84,12 +85,11 @@ public class MenuController {
                 .direction(direction)
                 .name(name)
                 .price(price)
-                .image(image)
                 .minPrice(minPrice)
                 .maxPrice(maxPrice)
                 .build();
 
-        Page<MenuResponse> menus = menuService.getAll(request);
+        Page<Menu> menus = menuService.getAll(request);
 
         PagingResponse pagingResponse = PagingResponse.builder()
                 .totalPage(menus.getTotalPages())
@@ -100,7 +100,7 @@ public class MenuController {
                 .hasPrevious(menus.hasPrevious())
                 .build();
 
-        CommonResponse<List<MenuResponse>> response = CommonResponse.<List<MenuResponse>>builder()
+        CommonResponse<List<Menu>> response = CommonResponse.<List<Menu>>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("Successfully get all menu")
                 .data(menus.getContent())
@@ -111,12 +111,14 @@ public class MenuController {
     }
 
     @PutMapping
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Menu> update(@RequestBody Menu menu) {
         Menu newMenu = menuService.update(menu);
         return ResponseEntity.ok(newMenu);
     }
 
     @DeleteMapping(path = "/{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<String> deleteById(@PathVariable String id) {
         menuService.delete(id);
         return ResponseEntity.ok("ok");

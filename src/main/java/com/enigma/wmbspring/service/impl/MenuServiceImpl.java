@@ -65,13 +65,13 @@ public class MenuServiceImpl implements MenuService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<MenuResponse> getAll(SearchMenuRequest request) {
+    public Page<Menu> getAll(SearchMenuRequest request) {
         if (request.getPage() <=0) request.setPage(1);
 
         Sort sort = Sort.by(Sort.Direction.fromString(request.getDirection()), request.getSortBy());
         Pageable pageable = PageRequest.of((request.getPage() - 1), request.getSize(), sort);
         Specification<Menu> specification = MenuSpecification.getSpecification(request);
-        return menuRepository.findAll(specification, pageable).map(this::convertMenuToMenuResponse);
+        return menuRepository.findAll(specification, pageable);
     }
 
     @Transactional(rollbackFor = Exception.class)

@@ -45,10 +45,10 @@ public class BillServiceImplTest {
     private BillService billService;
     private BillRequest request;
 
-    @BeforeEach
-    void setUp() {
-        billService = new BillServiceImpl(billRepository,customerService,menuService,billDetailService,tablesService,transactionTypeService);
-    }
+//    @BeforeEach
+//    void setUp() {
+//        billService = new BillServiceImpl(billRepository,customerService,menuService,billDetailService,tablesService,transactionTypeService);
+//    }
 
 //    @Test
 //    void shouldReturnBillWhenCreate() {
